@@ -39,13 +39,11 @@ double get_contributions_cpp(NumericMatrix F, NumericMatrix ND, NumericMatrix DM
     double A1 = 0.0;
     NumericVector out1(F.ncol());
     NumericVector out2(F.nrow());
-    #pragma omp parallel for 
     for (int i = 0; i < F.ncol(); ++i) {
         double val1 = F(idx, i);
         double val2 = DM(idx, i);
         out1[i] = ND(idx,i)*(val1 / val2);
     }
-    #pragma omp parallel for 
     for (int i = 0; i < F.nrow(); ++i) {
         double val1 = F(i, idx);
         double val2 = DM(i, idx);
@@ -61,7 +59,6 @@ double get_contributions_cpp(NumericMatrix F, NumericMatrix ND, NumericMatrix DM
 }
 
 void update_DegreeMinima(NumericMatrix DM, NumericVector mt, double val, int idx){
-    #pragma omp parallel for 
     for (int i = 0; i < DM.ncol(); ++i) {
         double myval = std::min(val, mt[i]);
         DM(idx, i) = myval;
@@ -122,7 +119,6 @@ NumericMatrix mmult(const NumericMatrix& m1, const NumericMatrix& m2){
     NumericMatrix out(m1.nrow(),m2.ncol());
     NumericVector rm1, cm2;
 
-    #pragma omp parallel for 
     for (size_t i = 0; i < m1.nrow(); ++i) {
         rm1 = m1(i,_);
         for (size_t j = 0; j < m2.ncol(); ++j) {
@@ -161,7 +157,6 @@ NumericVector computeMTt(NumericMatrix mtx){
 // [[Rcpp::export]]
 NumericMatrix computeFill0(NumericMatrix mtx){
     NumericMatrix mtx_transpose(mtx.ncol(), mtx.nrow());
-#pragma omp parallel for
     for (int i = 0; i < mtx.nrow(); ++i) {
         for (int j = 0; j < mtx.ncol(); ++j) {
             mtx_transpose(j,i) = mtx(i,j);
@@ -173,7 +168,6 @@ NumericMatrix computeFill0(NumericMatrix mtx){
 // [[Rcpp::export]]
 NumericMatrix computeFillt(NumericMatrix mtx){
     NumericMatrix mtx_transpose(mtx.ncol(), mtx.nrow());
-#pragma omp parallel for
     for (int i = 0; i < mtx.nrow(); ++i) {
         for (int j = 0; j < mtx.ncol(); ++j) {
             mtx_transpose(j,i) = mtx(i,j);
@@ -186,7 +180,6 @@ NumericMatrix computeFillt(NumericMatrix mtx){
 NumericMatrix computeDM0(NumericMatrix mtx){
     NumericVector mt0 = computeMT0(mtx);
     NumericMatrix DM0(mtx.nrow(), mtx.nrow());
-#pragma omp parallel for
     for (int i = 0; i < mtx.nrow(); ++i) {
         for (int j = 0; j < mtx.nrow(); ++j) {
             DM0(i,j) = std::min(mt0[i], mt0[j]);
@@ -199,7 +192,6 @@ NumericMatrix computeDM0(NumericMatrix mtx){
 NumericMatrix computeDMt(NumericMatrix mtx){
     NumericVector mtt = computeMTt(mtx);
     NumericMatrix DMt(mtx.ncol(), mtx.ncol());
-#pragma omp parallel for
     for (int i = 0; i < mtx.ncol(); ++i) {
         for (int j = 0; j < mtx.ncol(); ++j) {
             DMt(i,j) = std::min(mtt[i], mtt[j]);
@@ -212,7 +204,6 @@ NumericMatrix computeDMt(NumericMatrix mtx){
 NumericMatrix computeND0(NumericMatrix mtx){
     NumericVector mt0 = computeMT0(mtx);
     NumericMatrix ND0(mtx.nrow(), mtx.nrow());
-#pragma omp parallel for
     for (int i = 0; i < mtx.nrow(); ++i) {
         for (int j = 0; j < mtx.nrow(); ++j) {
             ND0(i,j) = mt0[i] > mt0[j];
@@ -225,7 +216,6 @@ NumericMatrix computeND0(NumericMatrix mtx){
 NumericMatrix computeNDt(NumericMatrix mtx){
     NumericVector mtt = computeMTt(mtx);
     NumericMatrix NDt(mtx.ncol(), mtx.ncol());
-#pragma omp parallel for 
     for (int i = 0; i < mtx.ncol(); ++i) {
         for (int j = 0; j < mtx.ncol(); ++j) {
             NDt(i,j) = mtt[i] > mtt[j];
@@ -457,7 +447,6 @@ NumericMatrix get_zeros_cpp(NumericMatrix mtx){
 
 NumericMatrix copy_mtx(NumericMatrix mtx){
     NumericMatrix my_mtx(mtx.nrow(), mtx.ncol());
-#pragma omp parallel for 
     for (int i = 0; i < mtx.nrow(); ++i) {
         for (int j = 0; j < mtx.ncol(); ++j) {
             my_mtx(i, j) = mtx(i,j);
