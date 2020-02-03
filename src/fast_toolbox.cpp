@@ -49,7 +49,7 @@ double get_contributions_cpp(NumericMatrix F, NumericMatrix ND, NumericMatrix DM
     for (int i = 0; i < F.nrow(); ++i) {
         double val1 = F(i, idx);
         double val2 = DM(i, idx);
-        out2[i] = ND(i,idx)*(val1 / val2);
+        out2[i] = ND(i, idx)*(val1 / val2);
     }
     for (int i = 0; i< F.ncol(); ++i){
         A1 += out1[i];
@@ -143,8 +143,8 @@ NumericVector computeMT0(NumericMatrix mtx){
     int N = mtx.nrow();
     NumericVector mt0(N);
     // make this for loop run in parallel :)
-#pragma omp parallel for
     for (int i = 0; i < N; ++i) {
+#pragma omp parallel for
         for (int j = 0; j < mtx.ncol(); ++j) {
             mt0(i) += mtx(i, j);
         }
@@ -156,8 +156,8 @@ NumericVector computeMT0(NumericMatrix mtx){
 NumericVector computeMTt(NumericMatrix mtx){
     int N = mtx.ncol();
     NumericVector mtt(N);
-#pragma omp parallel for
     for (int i = 0; i < N; ++i) {
+#pragma omp parallel for
         for (int j = 0; j < mtx.nrow(); ++j) {
             mtt(i) += mtx(j,i);
         }
@@ -253,13 +253,11 @@ NumericVector computeS(NumericMatrix mtx){
 
     double s0 = 0.0;
     double s1 = 0.0;
-#pragma omp parallel for 
     for (int i = 0; i < mtx.nrow(); ++i) {
         for (int j = 0; j < mtx.nrow(); ++j) {
             s0 += ND0(i,j) * (F0(i,j) / DM0(i,j));
         }
     }
-#pragma omp parallel for 
     for (int i = 0; i < mtx.ncol(); ++i) {
         for (int j = 0; j < mtx.ncol(); ++j) {
             s1 += NDt(i,j) * (Ft(i,j) / DMt(i,j));
@@ -469,7 +467,7 @@ NumericMatrix copy_mtx(NumericMatrix mtx){
 #pragma omp parallel for 
     for (int i = 0; i < mtx.nrow(); ++i) {
         for (int j = 0; j < mtx.ncol(); ++j) {
-            my_mtx(i,j) = mtx(i,j);
+            my_mtx(i, j) = mtx(i,j);
         }
     }
     return my_mtx;
