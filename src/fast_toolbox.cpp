@@ -38,14 +38,12 @@ double get_contributions_cpp(NumericMatrix F, NumericMatrix ND, NumericMatrix DM
     double A1 = 0.0;
     NumericVector contrib_rows(F.nrow());
     NumericVector contrib_cols(F.ncol());
-    #pragma omp parallel for
     for (int i = 0; i < F.ncol(); ++i) {
         double val1 = F(idx, i);
         double val2 = DM(idx, i);
         contrib_cols[i] = ND(idx,i)*(val1 / val2);
        
     }
-    #pragma omp parallel for
     for (int i = 0; i < F.nrow(); ++i) {
         double val1 = F(i, idx);
         double val2 = DM(i, idx);
