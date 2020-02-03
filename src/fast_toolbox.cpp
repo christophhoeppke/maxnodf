@@ -1,7 +1,7 @@
 #include <Rcpp.h>
 #include <math.h>
 #include <iostream>
-#include <omp.h>
+//#include <omp.h>
 // [[Rcpp::plugins(openmp)]]
 // [[Rcpp::depends(RcppProgress)]]
 using namespace Rcpp;
