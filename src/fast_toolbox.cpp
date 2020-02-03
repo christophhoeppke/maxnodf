@@ -37,30 +37,21 @@ void put_val(NumericMatrix mtx, int xpos, int ypos, double val){
 
 double get_contributions_cpp(NumericMatrix F, NumericMatrix ND, NumericMatrix DM, int idx){
     double A1 = 0.0;
-    NumericVector out1(F.ncol());
-    NumericVector out2(F.nrow());
-    #pragma omp parallel for 
     for (int i = 0; i < F.ncol(); ++i) {
         double val1 = F(idx, i);
         double val2 = DM(idx, i);
-        out1[i] = ND(idx,i)*(val1 / val2);
+        A1 += ND(idx,i)*(val1 / val2);
     }
-    #pragma omp parallel for 
     for (int i = 0; i < F.nrow(); ++i) {
         double val1 = F(i, idx);
         double val2 = DM(i, idx);
-        out2[i] = ND(i, idx)*(val1 / val2);
-    }
-    for (int i = 0; i< F.ncol(); ++i){
-        A1 += out1[i];
-    }
-    for (int i = 0; i< F.nrow(); ++i){
-        A1 += out2[i];
+        A1 += ND(i, idx)*(val1 / val2);
     }
     return A1;
 }
 
 void update_DegreeMinima(NumericMatrix DM, NumericVector mt, double val, int idx){
+    #pragma omp parallel for
     for (int i = 0; i < DM.ncol(); ++i) {
         double myval = std::min(val, mt[i]);
         DM(idx, i) = myval;
