@@ -23,7 +23,7 @@ int my_rand_int(int floor, int ceil){
 NumericVector pmin3(NumericVector vec1, NumericVector vec2){
     int n = vec1.size();
     NumericVector out(n);
-    #pragma omp parallel for schedule(static, 8)
+    #pragma opmp parallel for num_threads(4)
     for (int i = 0; i < n; i++) {
         out[i] = std::min(vec1[i], vec2[i]);
     }
