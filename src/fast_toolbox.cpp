@@ -1,8 +1,8 @@
-#include <Rcpp.h>
 #include <math.h>
 #include <iostream>
 #include <omp.h>
-# include <RcppArmadillo.h>
+#include <RcppArmadillo.h>
+
 // [[Rcpp::depends (RcppArmadillo)]]
 // [[Rcpp::plugins(openmp)]]
 // [[Rcpp::depends(RcppProgress)]]
