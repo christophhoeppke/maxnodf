@@ -22,7 +22,7 @@ int my_rand_int(int floor, int ceil){
 NumericVector pmin3(NumericVector vec1, NumericVector vec2){
     int n = vec1.size();
     NumericVector out(n);
-    #pragma omp parallel for 
+    #pragma omp parallel for schedule(static, 8)
     for (int i = 0; i < n; i++) {
         out[i] = std::min(vec1[i], vec2[i]);
     }
@@ -51,7 +51,7 @@ double get_contributions_cpp(NumericMatrix F, NumericMatrix ND, NumericMatrix DM
 }
 
 void update_DegreeMinima(NumericMatrix DM, NumericVector mt, double val, int idx){
-    #pragma omp parallel for
+    #pragma omp parallel for schedule(static, 8)
     for (int i = 0; i < DM.ncol(); ++i) {
         double myval = std::min(val, mt[i]);
         DM(idx, i) = myval;
