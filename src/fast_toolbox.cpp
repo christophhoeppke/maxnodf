@@ -1,7 +1,7 @@
 #include <math.h>
 #include <iostream>
 #include <omp.h>
-# include <RcppArmadillo.h>
+// #include <RcppArmadillo.h>
 // [[Rcpp::depends (RcppArmadillo)]]
 // [[Rcpp::plugins(openmp)]]
 // [[Rcpp::depends(RcppProgress)]]
@@ -23,7 +23,6 @@ int my_rand_int(int floor, int ceil){
 NumericVector pmin3(NumericVector vec1, NumericVector vec2){
     int n = vec1.size();
     NumericVector out(n);
-    #pragma opmp parallel for num_threads(4)
     for (int i = 0; i < n; i++) {
         out[i] = std::min(vec1[i], vec2[i]);
     }
@@ -38,21 +37,31 @@ void put_val(NumericMatrix mtx, int xpos, int ypos, double val){
 
 double get_contributions_cpp(NumericMatrix F, NumericMatrix ND, NumericMatrix DM, int idx){
     double A1 = 0.0;
+    NumericVector contrib_rows(F.nrow());
+    NumericVector contrib_cols(F.ncol());
+    #pragma omp parallel for
     for (int i = 0; i < F.ncol(); ++i) {
         double val1 = F(idx, i);
         double val2 = DM(idx, i);
-        A1 += ND(idx,i)*(val1 / val2);
+        contrib_cols[i] = ND(idx,i)*(val1 / val2);
+       
     }
+    #pragma omp parallel for
     for (int i = 0; i < F.nrow(); ++i) {
         double val1 = F(i, idx);
         double val2 = DM(i, idx);
-        A1 += ND(i, idx)*(val1 / val2);
+        contrib_rows[i] = ND(i, idx)*(val1 / val2);
+    }
+    for (int i = 0; i < F.ncol(); ++i) {
+        A1+= contrib_cols[i];
+    }
+    for (int i = 0; i < F.nrow(); ++i) {
+        A1 += contrib_rows[i];
     }
     return A1;
 }
 
 void update_DegreeMinima(NumericMatrix DM, NumericVector mt, double val, int idx){
-    #pragma omp parallel for schedule(static, 8)
     for (int i = 0; i < DM.ncol(); ++i) {
         double myval = std::min(val, mt[i]);
         DM(idx, i) = myval;
