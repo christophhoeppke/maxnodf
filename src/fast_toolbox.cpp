@@ -1,8 +1,7 @@
 #include <math.h>
 #include <iostream>
 #include <omp.h>
-#include <RcppArmadillo.h>
-
+# include <RcppArmadillo.h>
 // [[Rcpp::depends (RcppArmadillo)]]
 // [[Rcpp::plugins(openmp)]]
 // [[Rcpp::depends(RcppProgress)]]
@@ -21,9 +20,9 @@ int my_rand_int(int floor, int ceil){
 }
 
 // [[Rcpp::export]]
-arma::vec pmin3(arma::vec vec1, arma::vec vec2){
+NumericVector pmin3(NumericVector vec1, NumericVector vec2){
     int n = vec1.size();
-    arma::vec out(n);
+    NumericVector out(n);
     #pragma omp parallel for schedule(static, 8)
     for (int i = 0; i < n; i++) {
         out[i] = std::min(vec1[i], vec2[i]);
