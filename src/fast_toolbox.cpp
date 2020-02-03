@@ -70,7 +70,6 @@ void update_DegreeMinima(NumericMatrix DM, NumericVector mt, double val, int idx
 }
 
 void update_NegativeDeltas(NumericMatrix ND, NumericVector mt, int val, int idx){
-    #pragma omp parallel for 
     for (int i = 0; i < ND.ncol(); ++i) {
         // Update the row
         double myval = (val > mt[i]);
@@ -83,7 +82,6 @@ void update_NegativeDeltas(NumericMatrix ND, NumericVector mt, int val, int idx)
 }
 
 void update_FillFactors_rem0(NumericMatrix Fill, NumericMatrix mtx, int pos1, int pos2){
-    #pragma omp parallel for 
     for (int i = 0; i < Fill.ncol(); ++i) {
         // Update the row
         Fill(pos1, i) -= mtx(i, pos2);
@@ -94,7 +92,6 @@ void update_FillFactors_rem0(NumericMatrix Fill, NumericMatrix mtx, int pos1, in
 
 void update_FillFactors_remt(NumericMatrix Fill, NumericMatrix mtx, int pos1, int pos2){
 
-    #pragma omp parallel for 
     for (int i = 0; i < Fill.ncol(); ++i) {
         // Update the row
         Fill(pos1, i) -= mtx(pos2, i);
@@ -104,7 +101,6 @@ void update_FillFactors_remt(NumericMatrix Fill, NumericMatrix mtx, int pos1, in
 }
 
 void update_FillFactors_add0(NumericMatrix Fill, NumericMatrix mtx, int pos1, int pos2){
-    #pragma omp parallel for 
     for (int i = 0; i < Fill.ncol(); ++i) {
         // Update the row
         Fill(pos1, i) += mtx(i, pos2);
@@ -113,7 +109,6 @@ void update_FillFactors_add0(NumericMatrix Fill, NumericMatrix mtx, int pos1, in
     Fill(pos1, pos1) -= 1;
 }
 void update_FillFactors_addt(NumericMatrix Fill, NumericMatrix mtx, int pos1, int pos2){
-    #pragma omp parallel for 
     for (int i = 0; i < Fill.ncol(); ++i) {
         // Update the row
         Fill(pos1, i) += mtx(pos2, i);
@@ -144,7 +139,6 @@ NumericVector computeMT0(NumericMatrix mtx){
     NumericVector mt0(N);
     // make this for loop run in parallel :)
     for (int i = 0; i < N; ++i) {
-#pragma omp parallel for
         for (int j = 0; j < mtx.ncol(); ++j) {
             mt0(i) += mtx(i, j);
         }
@@ -157,7 +151,6 @@ NumericVector computeMTt(NumericMatrix mtx){
     int N = mtx.ncol();
     NumericVector mtt(N);
     for (int i = 0; i < N; ++i) {
-#pragma omp parallel for
         for (int j = 0; j < mtx.nrow(); ++j) {
             mtt(i) += mtx(j,i);
         }
