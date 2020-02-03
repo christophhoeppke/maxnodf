@@ -18,5 +18,5 @@ LinkingTo: Rcpp
 Imports: Rcpp (>= 0.12.18),
     stats (>= 3.4.4),
     utils (>= 3.4.4),
-    RcppArmadillo (>=0.9.800.4.0)
+    RcppArmadillo (>= 0.9.800)
 Suggests: testthat
