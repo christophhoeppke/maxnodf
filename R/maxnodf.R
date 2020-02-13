@@ -65,7 +65,15 @@ maxnodf <- function(web, quality = 0){
         stop("Parameter 'web' is expected to either be a matrix or a vector containing the matrix dimensions and number of links.")
     }
     if(Edges <= NodesA + NodesB){
-        stop("Number of links needs to satisfy 'Links > nrow(web) + ncol(web).")
+        # stop("Number of links needs to satisfy 'Links > nrow(web) + ncol(web).")
+        out_str <- 'Number of links does not satisfy #Links > nrow(web) + ncol(web).\n'
+        out_str <- out_str + 'This indicates that web contains more than one compartment.\n'
+        out_str <- out_str + 'Nodf maximisation will not be accurate in this case, '.
+        out_str <- out_str + 'please consider running maxnodf on individual '.
+        out_str <- out_str + 'compartments for better results'.
+        warning(out_str)
+        # We increase the number of edges to get an estimate.
+        Edges <- NodesA + NodesB + 1
     }
     if(Edges > NodesA * NodesB){
         stop("Number of links needs to satisfy 'Links <= nrow(web) * ncol(web).")
