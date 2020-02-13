@@ -1,9 +1,6 @@
 #include <Rcpp.h>
 #include <math.h>
 #include <iostream>
-//#include <omp.h>
-// [[Rcpp::plugins(openmp)]]
-// [[Rcpp::depends(RcppProgress)]]
 using namespace Rcpp;
 
 // Below is a simple example of exporting a C++ function to R. You can
