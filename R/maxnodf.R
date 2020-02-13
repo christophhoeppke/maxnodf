@@ -67,10 +67,10 @@ maxnodf <- function(web, quality = 0){
     if(Edges <= NodesA + NodesB){
         # stop("Number of links needs to satisfy 'Links > nrow(web) + ncol(web).")
         out_str <- 'Number of links does not satisfy #Links > nrow(web) + ncol(web).\n'
-        out_str <- out_str + 'This indicates that web contains more than one compartment.\n'
-        out_str <- out_str + 'Nodf maximisation will not be accurate in this case, '.
-        out_str <- out_str + 'please consider running maxnodf on individual '.
-        out_str <- out_str + 'compartments for better results'.
+        out_str <- paste(out_str, 'This indicates that web contains more than one compartment.\n')
+        out_str <- paste(out_str, 'Nodf maximisation will not be accurate in this case,')
+        out_str <- paste(out_str, 'please consider running maxnodf on individual')
+        out_str <- paste(out_str, 'compartments for better results.')
         warning(out_str)
         # We increase the number of edges to get an estimate.
         Edges <- NodesA + NodesB + 1
