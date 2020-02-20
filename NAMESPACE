@@ -2,5 +2,6 @@
 
 export(NODFc)
 export(maxnodf)
+export(nodf_cpp)
 import(Rcpp)
 useDynLib(maxnodf)
