@@ -73,6 +73,7 @@ nodf_cpp <- function(mtx) {
   #' @details For a given network, \code{nodf_cpp} calculates the raw NODF value. Calculation is fast as the code is implemented in C++.
   #' @return Returns the NODF of the network.
   #' @examples
+  #' set.seed(123)
   #' nodf_cpp(matrix(sample(x = 0:1, size = 100, replace = TRUE),10,10))
   #' @useDynLib maxnodf
   #' @import Rcpp

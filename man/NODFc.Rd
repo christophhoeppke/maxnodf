@@ -29,6 +29,7 @@ are slower, but find better optima.
 }
 }
 \examples{
+set.seed(123)
 NODFc(matrix(sample(x = 0:1, size = 100, replace = TRUE),10,10), quality = 0)
 }
 \references{

@@ -16,6 +16,7 @@
 #' @references 
 #' Song, C., Rohr, R.P. and Saavedra, S., 2017. Why are some plant–pollinator networks more nested than others? Journal of Animal Ecology, 86(6), pp.1417-1424
 #' @examples
+#' set.seed(123)
 #' NODFc(matrix(sample(x = 0:1, size = 100, replace = TRUE),10,10), quality = 0)
 #' @useDynLib maxnodf
 #' @import Rcpp
