@@ -10,10 +10,17 @@ test_that("maxnodf",{
   expect_equal(maxnodf(c(5,5,13), quality = 0)$max_nodf, 0.9)
 })
 
-test_that("Insufficient links",{
+test_that("Errors and warnings",{
   m <- matrix(0,5,5)
   diag(m) <- 1
-  expect_equal(maxnodf(m, quality = 0)$max_nodf, 0.75)
+  expect_warning(maxnodf(m, quality = 0)$max_nodf)
+  expect_error(maxnodf(c(1,1)))
+  expect_error(maxnodf(matrix(0,10,10)))
+  expect_error(maxnodf(matrix(-1,10,10)))
+  m <- matrix(0,5,5)
+  diag(m) <- 1
+  m[1:2,] <- 1
+  expect_error(maxnodf(m,quality = 4))
 })
 
 
