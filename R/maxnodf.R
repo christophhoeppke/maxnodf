@@ -66,11 +66,14 @@ maxnodf <- function(web, quality = 0){
     }
     if(Edges <= NodesA + NodesB){
         # stop("Number of links needs to satisfy 'Links > nrow(web) + ncol(web).")
-        out_str <- 'Number of links does not satisfy #Links > nrow(web) + ncol(web).\n'
-        out_str <- paste(out_str, 'This indicates that web contains more than one compartment.\n')
-        out_str <- paste(out_str, 'Nodf maximisation will not be accurate in this case,')
+        out_str <- 'Number of links does not satisfy Number of links > nrow(web) + ncol(web).\n'
+        out_str <- paste(out_str, 'This indicates that web contains more than one compartment')
+        out_str <- paste(out_str, '(subsets of the web which are not connected to the main network).\n')
+        out_str <- paste(out_str, 'NODF maximisation will not be accurate in this case,')
         out_str <- paste(out_str, 'please consider running maxnodf on individual')
         out_str <- paste(out_str, 'compartments for better results.')
+        out_str <- paste(out_str, 'We have added', Edges - (NodesA + NodesB + 1), "links")
+        out_str <- paste(out_str, 'in order to compute a conservative maximum NODF estimate.')
         warning(out_str)
         # We increase the number of edges to get an estimate.
         Edges <- NodesA + NodesB + 1
