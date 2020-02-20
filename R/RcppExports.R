@@ -66,6 +66,17 @@ get_zeros_cpp <- function(mtx) {
 }
 
 nodf_cpp <- function(mtx) {
+  #' Raw NODF calculation
+  #'
+  #' Calculates the raw NODF of a bipartite incidence matrix
+  #' @param mtx A numeric matrix describing a bipartite network (a bipartite incidence matrix where elements are positive numbers if nodes interact, and 0 otherwise).
+  #' @details For a given network, \code{nodf_cpp} calculates the raw NODF value. Calculation is fast as the code is implemented in C++.
+  #' @return Returns the NODF of the network.
+  #' @examples
+  #' nodf_cpp(matrix(sample(x = 0:1, size = 100, replace = TRUE),10,10))
+  #' @useDynLib maxnodf
+  #' @import Rcpp
+  #' @export
     .Call('_maxnodf_nodf_cpp', PACKAGE = 'maxnodf', mtx)
 }
 
