@@ -69,11 +69,14 @@ maxnodf <- function(web, quality = 0){
         out_str <- 'Number of links does not satisfy Number of links > nrow(web) + ncol(web).\n'
         out_str <- paste(out_str, 'This indicates that web contains more than one compartment')
         out_str <- paste(out_str, '(subsets of the web which are not connected to the main network).\n')
-        out_str <- paste(out_str, 'NODF maximisation will not be accurate in this case,')
-        out_str <- paste(out_str, 'please consider running maxnodf on individual')
-        out_str <- paste(out_str, 'compartments for better results.')
-        out_str <- paste(out_str, 'We have added', Edges - (NodesA + NodesB + 1), "links")
-        out_str <- paste(out_str, 'in order to compute a conservative maximum NODF estimate.')
+        out_str <- paste(out_str, 'The input data had', NodesA + NodesB, "nodes and", Edges, "links.")
+        out_str <- paste(out_str, 'We have added', (NodesA + NodesB + 1) - Edges, "links")
+        out_str <- paste(out_str, 'to satisfy Number of links > nrow(web) + ncol(web)')
+        out_str <- paste(out_str, 'and ensure the web contains only one compartment.\n')
+        out_str <- paste(out_str, 'This allows us to compute a maximum NODF estimate.\n')
+        out_str <- paste(out_str, 'NODF maximisation will not be accurate in this case, though the estimate')
+        out_str <- paste(out_str, 'is conservative.\nPlease consider running maxnodf on individual')
+        out_str <- paste(out_str, 'compartments, such as by removing nodes which are not connected to the main network, for better results.')
         warning(out_str)
         # We increase the number of edges to get an estimate.
         Edges <- NodesA + NodesB + 1
