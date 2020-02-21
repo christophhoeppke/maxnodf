@@ -3,22 +3,20 @@
 * Fedora Linux, R-devel, clang, gfortran (R-hub)
 * Debian Linux, R-devel, GCC ASAN/UBSAN (R-hub)
 * Windows Server 2008 R2 SP1, R-devel, 32/64 bit (R-hub)
-* Windows Server 2008 R2 SP1, R-release, 32/64 bit ***
+* Windows Server 2008 R2 SP1, R-release, 32/64 bit
 * local OS X install (release and devel)
 
 ## R CMD check results 
 
 There were no ERRORs or WARNINGs.
 
-NOTE for OS X (release and devel); Windows (devel); :
+There were four NOTES
 
   * Non-standard files/directories found at top level:
     ‘README.Rmd’ ‘cran-comments.md’
 
 These are commonly-used files. We include an example in our README and so we generate this with R Markdown. Submission comments are in cran-comments.md to indicate the results of check() on different platforms.
 
-NOTES for Ubuntu Linux 16.04 LTS, R-release, GCC; Fedora Linux, R-devel, clang, gfortran; and Windows Server 2008 R2 SP1, R-devel, 32/64 bit
-  
   * New submission
   
 This is a new submission
@@ -29,8 +27,6 @@ This is a new submission
   nestedness (7:43)
 
 These are technical terms that are spelled correctly.
-
-There was 1 additional NOTE for Windows (devel):
 
   * checking for non-standard things in the check directory ... NOTE
 Found the following files/directories:
