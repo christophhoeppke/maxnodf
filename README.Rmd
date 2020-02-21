@@ -12,6 +12,9 @@ knitr::opts_chunk$set(
 )
 ```
 
+[![Build Status](https://travis-ci.org/SimmonsBI/bmotif.svg?branch=master)](https://travis-ci.org/christophhoeppke/maxnodf)
+[![codecov](https://codecov.io/gh/SimmonsBI/bmotif/branch/master/graph/badge.svg)](https://codecov.io/gh/christophhoeppke/maxnodf)
+
 ## Overview
 
 `maxnodf` calculates the maximum NODF value that can be achieved in a bipartite network with a given number of rows, columns and links.
