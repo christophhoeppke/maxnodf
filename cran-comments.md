@@ -10,7 +10,7 @@
 
 There were no ERRORs or WARNINGs.
 
-There were four NOTES
+There were four NOTES:
 
   * Non-standard files/directories found at top level:
     ‘README.Rmd’ ‘cran-comments.md’
@@ -34,6 +34,13 @@ Found the following files/directories:
   'examples_i386' 'examples_x64' 'maxnodf-Ex_i386.Rout'
 
 This seems to be a result of the CMD check rather than an actual problem.
+
+  * Found the following hidden files and directories:
+    .travis.yml
+  These were most likely included in error. See section ‘Package
+  structure’ in the ‘Writing R Extensions’ manual.
+  
+This is a configuration file for Travis Continuous Integration
 
 ## Downstream dependencies
 There are currently no known downstream dependencies for this package.
