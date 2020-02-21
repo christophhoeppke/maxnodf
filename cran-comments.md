@@ -6,7 +6,7 @@
 * Windows Server 2008 R2 SP1, R-release, 32/64 bit ***
 * local OS X install (release and devel)
 
-## R CMD check results
+## R CMD check results 
 
 There were no ERRORs or WARNINGs.
 
