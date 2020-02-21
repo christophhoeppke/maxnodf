@@ -1,6 +1,10 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+[![Build
+Status](https://travis-ci.org/christophhoeppke/maxnodf.svg?branch=master)](https://travis-ci.org/christophhoeppke/maxnodf)
+[![codecov](https://codecov.io/gh/christophhoeppke/maxnodf/branch/master/graph/badge.svg)](https://codecov.io/gh/christophhoeppke/maxnodf)
+
 ## Overview
 
 `maxnodf` calculates the maximum NODF value that can be achieved in a
