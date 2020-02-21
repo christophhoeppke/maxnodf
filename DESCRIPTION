@@ -18,4 +18,5 @@ LinkingTo: Rcpp
 Imports: Rcpp (>= 0.12.18),
     stats (>= 3.4.4),
     utils (>= 3.4.4),
-Suggests: testthat
+Suggests: testthat,
+    covr
