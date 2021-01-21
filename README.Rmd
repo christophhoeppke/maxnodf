@@ -19,9 +19,19 @@ knitr::opts_chunk$set(
 
 `maxnodf` calculates the maximum NODF value that can be achieved in a bipartite network with a given number of rows, columns and links.
 
+## Citation
+If you use the package in your work, please cite:
+Hoeppke, C. and Simmons, B.I. (2021), Maxnodf: an R package for fair and fast comparisons of nestedness between networks. Methods in Ecology and Evolution. Accepted Author Manuscript. https://doi.org/10.1111/2041-210X.13545
+
 ## Installation
 
-You can install `maxnodf` from github with:
+To install the released version from CRAN:
+
+```{r, eval = FALSE}
+install.packages("maxnodf")
+```
+
+To install the development version from GitHub:
 
 ```{r gh-installation, eval = FALSE}
 install.packages("devtools") # install devtools if needed

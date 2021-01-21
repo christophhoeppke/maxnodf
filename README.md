@@ -5,21 +5,35 @@
 Status](https://travis-ci.org/christophhoeppke/maxnodf.svg?branch=master)](https://travis-ci.org/christophhoeppke/maxnodf)
 [![codecov](https://codecov.io/gh/christophhoeppke/maxnodf/branch/master/graph/badge.svg)](https://codecov.io/gh/christophhoeppke/maxnodf)
 
-## Overview
+Overview
+--------
 
 `maxnodf` calculates the maximum NODF value that can be achieved in a
 bipartite network with a given number of rows, columns and links.
 
-## Installation
+Citation
+--------
 
-You can install `maxnodf` from github with:
+If you use the package in your work, please cite: Hoeppke, C. and
+Simmons, B.I. (2021), Maxnodf: an R package for fair and fast
+comparisons of nestedness between networks. Methods in Ecology and
+Evolution. Accepted Author Manuscript.
+<a href="https://doi.org/10.1111/2041-210X.13545" class="uri">https://doi.org/10.1111/2041-210X.13545</a>
 
-``` r
-install.packages("devtools") # install devtools if needed
-devtools::install_github("christophhoeppke/maxnodf")
-```
+Installation
+------------
 
-## Use
+To install the released version from CRAN:
+
+    install.packages("maxnodf")
+
+To install the development version from GitHub:
+
+    install.packages("devtools") # install devtools if needed
+    devtools::install_github("christophhoeppke/maxnodf")
+
+Use
+---
 
 `maxnodf` has three functions:
 
@@ -28,7 +42,7 @@ devtools::install_github("christophhoeppke/maxnodf")
 For a given network, `maxnodf` calculates the maximum nestedness that
 can be achieved in a network with a given number of rows, columns and
 links, subject to the constraint that all rows and columns must have at
-least one link (i.e. row and column totals must always be \>= 1). As
+least one link (i.e. row and column totals must always be &gt;= 1). As
 input, `maxnodf()` takes either a numeric matrix describing a bipartite
 network (a bipartite incidence matrix where elements are positive
 numbers if nodes interact, and 0 otherwise) or a numeric vector of
@@ -46,9 +60,9 @@ bipartite network. These can be set using the `quality` argument. Lower
 quality settings are faster, but find worse optima. Higher quality
 settings are slower, but find better optima.
 
-  - `quality = 0`, uses a greedy algorithm.
-  - `quality = 1`, uses a greedy algorithm plus hillclimbing.
-  - `quality = 2`, uses a simulated annealing algorithm, with the greedy
+-   `quality = 0`, uses a greedy algorithm.
+-   `quality = 1`, uses a greedy algorithm plus hillclimbing.
+-   `quality = 2`, uses a simulated annealing algorithm, with the greedy
     algorithm output as the start point. Best results, but requires the
     most computation time.
 
@@ -71,21 +85,22 @@ A simple function that takes a bipartite matrix as input, and returns
 the raw NODF value of the matrix. Used internally by `maxnodf`.
 Calculation is quick, because it is implemented in C++.
 
-## Example
+Example
+-------
 
-``` r
-m <- matrix(0,10,10) # initialise an empty network
-m[1,] <- 1 # ensure all row species have at least one link
-m[,1] <- 1 # ensure all column species have at least one link
-m[2:10,2:10] <- sample(0:1, 9 * 9, replace = TRUE) # randomise the rest of the matrix
-maxnodf(web = m, quality = 2) # calculate the maximum nestedness
-```
+    m <- matrix(0,10,10) # initialise an empty network
+    m[1,] <- 1 # ensure all row species have at least one link
+    m[,1] <- 1 # ensure all column species have at least one link
+    m[2:10,2:10] <- sample(0:1, 9 * 9, replace = TRUE) # randomise the rest of the matrix
+    maxnodf(web = m, quality = 2) # calculate the maximum nestedness
 
-## License
+License
+-------
 
 The code is released under the MIT license (see `LICENSE` file).
 
-## References
+References
+----------
 
 Song, C., Rohr, R.P. and Saavedra, S., 2017. Why are some
 plant–pollinator networks more nested than others? Journal of Animal
