@@ -99,6 +99,12 @@ License
 
 The code is released under the MIT license (see `LICENSE` file).
 
+Authors
+--------
+Christoph Hoeppke (author, creator)
+Benno Simmons (author)
+Chuliang Song (contributor)
+
 References
 ----------
 
